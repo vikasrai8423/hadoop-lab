@@ -1,0 +1,55 @@
+A1
+root
+ vi exm1.txt
+ vi exm2.txt
+ hadoop fs -mkdir emp
+ hdfs dfs -ls /user/root
+ hdfs dfs -put ./exm*.txt /user/root/emp
+ hdfs dfs -ls /user/root/emp
+ hdfs dfs -cat /user/root/emp/
+
+A2
+root
+hdfs dfs -mkdir education
+hdfs dfs -ls /user/root
+hdfs dfs -copyFromLocal exm1.txt /user/root/education
+hdfs dfs -cat /user/root/education/exm1.txt
+hdfs dfs -cat /user/root/education/exm1.txt | head -1
+
+A3
+
+
+hdfs dfs -copyToLocal /user/root/education .
+ls
+hdfs dfs -get /user/root/education/exm1.txt exm3.txt
+
+A4
+
+Create new dir in hdfs 
+hdfs dfs -mkdir /user/root/dir1
+hdfs dfs -put exm.txt /user/root/dir1
+copy the content to the other
+hdfs dfs -cp /user/root/dir1 /user/root/dir2
+
+
+A5
+
+hdfs dfs -touch /user/root/education/exm1.txt
+hdfs dfs -touch /user/root/education/exm2.txt
+hdfs dfs -getmerge -nl /user/root/education/exm1.txt /user/root/education/exm2.txt output.txt
+cat output.txt
+
+Recursively list content
+hdfs dfs -ls -R /user/root/education
+
+to delete folder recuserviely
+
+hdfs dfs -rm -r -f /user/root/education
+last modified time of directory or path
+hdfs dfs -stat /user/root/education
+
+print last bytes of files /user/root/education/exm1.txt and store output.txt 
+
+
+
+~                        

@@ -1,0 +1,40 @@
+wget https://archive.cloudera.com/cm7/7.4.4/cloudera-manager-installer.bin
+chmod u+x cloudera-manager-installer.bin
+sudo ./cloudera-manager-installer.bin
+
+#to uninstall CDP
+
+bash /opt/cloudera/installer/uninstall-cloudera-manager.sh
+
+rm -rf /opt/cloudera/
+
+rm -rf cloudera-manager-installer.bin
+
+yum clean all
+
+replication 
+
+hdfs dfs -mkdir /tmp/demo3
+hdfs dfs -ls /tmp/ 
+hadoop distcp hdfs://hpcsa06:8020/tmp/demo hdfs://192.168.82.25:8020/tmp/
+ssh root@192.168.82.25
+hdfs dfs -ls /tmp/
+
+
+snapshot
+
+su - hdfs 
+hdfs dfs -mkdir /tmp/abs
+hdfs dfs -touch /tmp/abs snap
+hdfs dfsadmin -allowSnapshot /tmp/abs
+ hdfs dfs -createSnapshot /tmp/abs snap
+ hdfs dfs -ls /tmp/abs 
+ hdfs dfs -ls /tmp/abs/.snapshot 
+ hdfs dfs -deleteSnapshot /tmp/abs/.snapshot 
+ hdfs dfs -deleteSnapshot /tmp/abs/
+ hdfs dfs -deleteSnapshot /tmp/abs/ snap
+ hdfs dfs -ls /tmp/abs/ .snapshot
+
+
+
+

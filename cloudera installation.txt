@@ -1,0 +1,32 @@
+
+cloudera installation 
+wget https://archive.cloudera.com/cm7/7.4.4/cloudera-manager-installer.bin
+chmod u+x cloudera-manager-installer.bin
+sudo ./cloudera-manager-installer.bin
+
+
+To run wordcount program
+wget https://raw.githubusercontent.com/HortonworksUniversity/Ops_Labs/master/const.txt
+hdfs dfs -put const.txt /user/root
+cd /opt/cloudera/parcels/CDH/lib/hadoop-mapreduce/
+yarn jar ./hadoop-mapreduce-examples.jar wordcount /user/root/const.txt /user/root/result1
+
+
+
+To run spark wordcount program 
+ spark-shell  
+val data=sc.textFile("sparkdata.txt")  
+ data.collect;  
+ val splitdata = data.flatMap(line => line.split(" "));  
+splitdata.collect;  
+val mapdata = splitdata.map(word => (word,1)); 
+mapdata.collect;  
+ val reducedata = mapdata.reduceByKey(_+_);  
+reducedata.collect;  
+
+replication
+hdfs dfs -mkdir /user/root
+hdfs dfs -setrep -R 5 /user/root/ ....for dir
+hdfs dfs -setrep -w 5 /user/root/text.txt ....for file
+hdfs fsck /user/root/text.txt ...to see default replication factor
+
